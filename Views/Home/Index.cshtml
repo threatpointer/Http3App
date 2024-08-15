@@ -1,0 +1,76 @@
+﻿@using Http3App.Middleware
+@model dynamic
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUIC Connection Details</title>
+    <link rel="stylesheet" href="~/css/site.css">
+    <script>
+        // Auto-refresh the page every 30 seconds
+        setInterval(function () {
+            fetch(window.location.href)
+                .then(response => response.text())
+                .then(html => {
+                    document.querySelector('body').innerHTML = new DOMParser()
+                        .parseFromString(html, 'text/html')
+                        .querySelector('body').innerHTML;
+                })
+                .catch(error => console.error('Error refreshing page:', error));
+        }, 30000); // 30 seconds
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>HTTP/3 QUIC Connections - Detailed View</h1>
+        </div>
+
+        <h2>Active Connections</h2>
+        <ul>
+            @foreach (var connection in ViewData["ActiveConnections"] as List<QuicConnectionDetail>)
+            {
+                <li>
+                    <div class="connection-details">
+                        <strong>Connection ID:</strong> @connection.ConnectionId <br />
+                        <strong>Method:</strong> @connection.QuicPacketDetails.Method <br />
+                        <strong>Path:</strong> @connection.QuicPacketDetails.Path <br />
+                        <strong>Query String:</strong> @connection.QuicPacketDetails.QueryString <br />
+                        <strong>Headers:</strong> @connection.QuicPacketDetails.Headers <br />
+                        <strong>Body:</strong> @connection.QuicPacketDetails.Body <br />
+                        <strong>Local IP:</strong> @connection.QuicPacketDetails.LocalIp <br />
+                        <strong>Local Port:</strong> @connection.QuicPacketDetails.LocalPort <br />
+                        <strong>Remote IP:</strong> @connection.QuicPacketDetails.RemoteIp <br />
+                        <strong>Remote Port:</strong> @connection.QuicPacketDetails.RemotePort <br />
+                    </div>
+                </li>
+            }
+        </ul>
+
+        <hr />
+
+        <h2>Stale/Reset Connections</h2>
+        <ul>
+            @foreach (var connection in ((List<QuicConnectionDetail>)ViewData["StaleConnections"]).AsEnumerable().Reverse())
+            {
+                <li>
+                    <div class="connection-details">
+                        <strong>Connection ID:</strong> @connection.ConnectionId <br />
+                        <strong>Method:</strong> @connection.QuicPacketDetails.Method <br />
+                        <strong>Path:</strong> @connection.QuicPacketDetails.Path <br />
+                        <strong>Query String:</strong> @connection.QuicPacketDetails.QueryString <br />
+                        <strong>Headers:</strong> @connection.QuicPacketDetails.Headers <br />
+                        <strong>Body:</strong> @connection.QuicPacketDetails.Body <br />
+                        <strong>Local IP:</strong> @connection.QuicPacketDetails.LocalIp <br />
+                        <strong>Local Port:</strong> @connection.QuicPacketDetails.LocalPort <br />
+                        <strong>Remote IP:</strong> @connection.QuicPacketDetails.RemoteIp <br />
+                        <strong>Remote Port:</strong> @connection.QuicPacketDetails.RemotePort <br />
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
+</body>
+</html>

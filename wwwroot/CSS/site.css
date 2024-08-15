@@ -1,0 +1,60 @@
+﻿/* wwwroot/css/site.css */
+body {
+    background-color: #2d2d2d;
+    color: #e0e0e0;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+
+h1, h2 {
+    color: #00bcd4;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    background-color: #3d3d3d;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #555;
+}
+
+    li strong {
+        color: #00bcd4;
+    }
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+h2 {
+    font-size: 1.5rem;
+    margin-top: 20px;
+}
+
+.connection-details {
+    margin-left: 20px;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+hr {
+    border: 1px solid #444;
+    margin: 20px 0;
+}
